@@ -1,0 +1,10 @@
+<h2>Pulls</h2>
+<hr>
+<p>
+  <strong>Pull Requests</strong>
+</p>
+<% PullRequest.all.each do |poll| %>
+  <p>
+  <%= poll.caption %>?
+  </p>
+<% end %>
