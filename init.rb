@@ -1,3 +1,5 @@
+require_dependency 'pull_request_issue_patch'
+
 Redmine::Plugin.register :redmine_github_sync do
   name ' Redmine plugin for github synchronization'
   author 'LLC DealerPoint'
