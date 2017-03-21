@@ -7,21 +7,21 @@ class PullRequestsController < ApplicationController
   end
 
   def hooks
-    request_params =
-      JSON.parse(hook_params[:payload])['pull_request']
     pr = {}
-    title = request_params['title']
-    issue_number = /\d+/.match(title)[0]
     if request_params
-      pr =
-        PullRequest
-          .new(request_params.slice('html_url', 'title', 'state', 'locked'))
-      pr.github_id = request_params['id']
-      pr.issue = Issue.find(issue_number) if issue_number
-      pr.save
+      title = request_params['title']
+      issue_number = /\d+/.match(title)[0]
+      issue = issue_number ? Issue.find(issue_number) : nil
+      pr = PullRequest.find_by(github_id: request_params['github_id'])
+      if pr.present?
+        pr.update_attributes(request_params.merge('issue_id'=> issue.id))
+      else
+        pr = PullRequest.new(request_params)
+        pr.issue = issue
+        pr.save
+      end
     end
     render json: { object: pr }
-
   end
 
   def get_hooks
@@ -30,7 +30,10 @@ class PullRequestsController < ApplicationController
 
   private
 
-  def hook_params
-    params.permit(:payload)
+  def request_params
+    hook_params = params.permit(:payload)
+    pull_request = JSON.parse(hook_params[:payload])['pull_request']
+    pull_request['github_id'] = pull_request['id']
+    pull_request.slice('html_url', 'title', 'state', 'locked', 'github_id')
   end
 end
