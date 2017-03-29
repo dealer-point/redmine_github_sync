@@ -1,0 +1,16 @@
+<%
+
+defaults = Redmine::Plugin::registered_plugins[:redmine_github_sync].settings[:default]
+enable_pull_requests = settings['enable_pull_requests'] || defaults[:enable_pull_requests]
+ %>
+
+<table>
+  <tbody>
+    <tr>
+      <th>Enable Pull requests</th>
+      <td>
+        <%=check_box_tag('settings[enable_pull_requests]', value = true, checked = @settings['enable_pull_requests'] )%>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -3,8 +3,9 @@
 <p>
   <strong>Pull Requests</strong>
 </p>
-<% PullRequest.all.each do |poll| %>
+<% PullRequest.all.each do |pull| %>
   <p>
-  <%= poll.title %>?
+    <%= pull.title %>
   </p>
 <% end %>
+

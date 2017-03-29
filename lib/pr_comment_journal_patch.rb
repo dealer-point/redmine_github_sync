@@ -1,12 +1,12 @@
-require_dependency 'issue'
+require_dependency 'journal'
 
-module PullRequestIssuePatch
+module PrCommentJournalPatch
   def self.included(base)
     base.extend(ClassMethods)
     # Same as typing in the class
     base.class_eval do
       unloadable # Send unloadable so it will not be unloaded in development
-      has_many :pull_requests, dependent: :destroy
+      has_many :pr_comments, dependent: :destroy
     end
   end
 
@@ -15,4 +15,4 @@ module PullRequestIssuePatch
 end
 
 # Add module to Issue
-Issue.send(:include, PullRequestIssuePatch)
+Journal.send(:include, PrCommentJournalPatch)

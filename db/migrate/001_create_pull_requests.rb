@@ -7,6 +7,8 @@ class CreatePullRequests < ActiveRecord::Migration
       t.string :state
       t.boolean :locked
       t.integer :github_id
+      t.datetime :created_at
+      t.datetime :updated_at
     end
   end
 end
