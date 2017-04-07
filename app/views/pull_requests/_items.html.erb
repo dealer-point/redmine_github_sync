@@ -1,15 +1,18 @@
-<hr>
-<strong>Pull Requests</strong>
-</p>
-<% @issue.pull_requests.order(created_at: :desc).each do |pull| %>
-  <div class="pr-comments">
-    <p>
-    <legend><i><%= pull.state %></i>
-      <span class=<%= pull.state %>>
-        <%= pull.title %>
-      </span>
-    </legend>
-    <small>  <%= link_to pull.html_url, pull.html_url %></small>
-    </p>
-  </div>
+<% if Setting.plugin_redmine_github_sync['enable_pull_requests'].eql?('true') %>
+  <hr>
+  <strong>Pull Requests
+  <%='scxscsc' if Setting.plugin_redmine_github_sync['enable_pull_requests'].eql?('true')%></strong>
+  </p>
+  <% @issue.pull_requests.order(created_at: :desc).each do |pull| %>
+    <div class="pr-comments">
+      <p>
+      <legend><i><%= pull.state %></i>
+        <span class=<%= pull.state %>>
+          <%= pull.title %>
+        </span>
+      </legend>
+      <small>  <%= link_to pull.html_url, pull.html_url %></small>
+      </p>
+    </div>
+  <% end %>
 <% end %>

@@ -1,4 +1,4 @@
-class PollsHookListener < Redmine::Hook::ViewListener
+class PullsHookListener < Redmine::Hook::ViewListener
 
   render_on :view_issues_show_description_bottom, :partial => 'pull_requests/items'
 
