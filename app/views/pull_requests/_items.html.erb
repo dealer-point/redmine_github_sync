@@ -1,7 +1,6 @@
 <% if Setting.plugin_redmine_github_sync['enable_pull_requests'].eql?('true') %>
   <hr>
   <strong>Pull Requests
-  <%='scxscsc' if Setting.plugin_redmine_github_sync['enable_pull_requests'].eql?('true')%></strong>
   </p>
   <% @issue.pull_requests.order(created_at: :desc).each do |pull| %>
     <div class="pr-comments">

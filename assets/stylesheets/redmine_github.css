@@ -17,3 +17,7 @@
   text-decoration: line-through;
 }
 
+td {
+	line-height: 1;
+}
+
