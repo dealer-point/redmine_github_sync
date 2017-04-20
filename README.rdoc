@@ -1,3 +1,0 @@
-= redmine_github_sync
-
-Description goes here
