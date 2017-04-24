@@ -6,38 +6,6 @@
       <%= hidden_field_tag 'settings[enable_pull_requests]', false %>
       <%= check_box_tag('settings[enable_pull_requests]', value = 'true', checked = settings['enable_pull_requests']=='true' )%>
       </td>
-    </tr>
-    <tr id="new_rep">    
-	    <th>Owner</th>
-      <td>
-        <input type="text" 
-               id="settings_repo_owner" 
-               value="<%= settings['repo_owner'] %>" 
-               name="settings[repo_owner]" 
-               placeholder="Owner">
-      </td>  
-    </tr>
-    <tr>  
-      <th>Token</th>    
-      <td>
-        <input type="text" 
-               id="settings_token" 
-               value="<%= settings['token'] %>" 
-               name="settings[token]" 
-               style="min-width: 310px;"
-               placeholder="Token">
-      </td>
-    </tr>
-    <tr>
-      <th>Names of repositories</th>
-      <td>
-        <textarea type="text" 
-		              id="settings_repo_title" 
-		              value="<%= settings['repo_title'] %>" 
-		              name="settings[repo_title]" 
-		              placeholder="Names of repositories"><%= settings['repo_title'] %></textarea>
-      </td>
-		    <td>*If you have more one repositories seporate its name with ";"</td> 	  	
 	  </tr>
   </tbody>
 </table>

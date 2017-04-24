@@ -12,8 +12,8 @@
 
 # Connect old pull requests
 For connect your old pull request you shoud: 
-  - get github token
-  - go to plugin settings in the redmine 
-  - specify token, owner and name of your repository
+  - get github token. 
+  For it go to your GitHub profile settings, select Personal access tokens in the left menu, choose 'repo' checkbox, fill in the description and put Generate token
   - run task:
- `bundle exec rake redmine:redmine_github_sync`
+ `bundle exec rake redmine:redmine_github_sync[owner, repo, token]`
+Where owner it is a owner of the repository, repo it is a name of the repository and token - your personal access token.
