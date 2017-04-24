@@ -7,7 +7,6 @@
       <%= check_box_tag('settings[enable_pull_requests]', value = 'true', checked = settings['enable_pull_requests']=='true' )%>
       </td>
     </tr>
-    <%@hide_repo_info = settings['repo_owner'].empty? && settings['token'].empty? && settings['repo_title'].empty?%>
     <tr id="new_rep">    
 	    <th>Owner</th>
       <td>
