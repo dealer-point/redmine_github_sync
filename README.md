@@ -4,14 +4,14 @@
 ***
 
 # Install
-  1. cd plugins
-  2. git clone git@github.com:dealer-point/redmine_github_sync.git
-  3. Run "bundle exec rake redmine:plugins:migrate"
+  1. `cd plugins`
+  2. `git clone git@github.com:dealer-point/redmine_github_sync.git`
+  3. `bundle exec rake redmine:plugins:migrate`
   4. Go to the GitHub, open settings of the project, select tab 'webhooks' and set url to your server to payload controller with ".json" (for example www.redmine.com/payload.json)
   5. Choose events Pull request and Pull request review comment
 
-# Connect old pull requests
-For connect your old pull request you shoud: 
+## Connect old pull requests
+#### For connect your old pull request you should: 
   - get github token. 
   For it go to your GitHub profile settings, select Personal access tokens in the left menu, choose 'repo' checkbox, fill in the description and put Generate token
   - run task:
