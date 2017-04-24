@@ -8,29 +8,37 @@ class PullRequestsController < ApplicationController
   end  
 
   def hooks
-    if request_params
-      title = request_params['title']
-      title_math = /\d+/.match(title)
-      @issue_number = if title_math
-        title_math[0] 
-      else
-        nil
-      end
-      issue = @issue_number ? Issue.find_by(@issue_number) : nil
+    issue = issue_by_number
+    if issue.present?         
       pr = PullRequest.find_by(github_id: request_params['github_id'])
       if pr.present?
         pr.update_attributes(request_params.merge('issue_id'=> issue.id))
-      elsif issue.present?
+      else
         pr = PullRequest.new(request_params)
         pr.issue = issue
         pr.save
       end
+      update_comments(pr.id, action_params) if comment_params && action_params
+      render json: { object: pr }
+    else 
+      render json: { message: "don\'t have issue with this number" }
     end
-    update_comments(pr.id, action_params) if comment_params && action_params
-    render json: { object: pr }
   end
 
   private
+
+  def issue_by_number
+    return nil unless request_params
+    title = request_params['title']
+    title_math = /\d+/.match(title)
+    @issue_number = if title_math
+      title_math[0] 
+    else
+      nil
+    end
+
+    Issue.find_by_id(@issue_number)
+  end
 
   def action_params
     hook_params = params.permit(:payload)
