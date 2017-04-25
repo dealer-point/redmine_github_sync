@@ -1,4 +1,5 @@
 namespace :redmine do
+  desc "GitHub synchronize"
   task :redmine_github_sync, [:owner, :repo, :token] => [:environment] do |t, args|
     owner = args[:owner]
     repo = args[:repo]
