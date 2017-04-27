@@ -10,6 +10,8 @@ class PullRequestsController < ApplicationController
   end
 
   def hooks
+    return head :ok if params[:payload].blank?
+
     issue = issue_by_number
     if issue.present?
       pr = PullRequest.find_by(github_id: request_params['github_id'])
@@ -44,11 +46,13 @@ class PullRequestsController < ApplicationController
 
   def action_params
     hook_params = params.permit(:payload)
+    return {} if hook_params.blank?
     JSON.parse(hook_params[:payload])['action']
   end
 
   def request_params
     hook_params = params.permit(:payload)
+    return {} if hook_params.blank?
     pull_request = JSON.parse(hook_params[:payload])['pull_request']
     pull_request['github_id'] = pull_request['id']
     pull_request.slice('html_url', 'title', 'state', 'locked', 'github_id',
@@ -57,6 +61,7 @@ class PullRequestsController < ApplicationController
 
   def comment_params
     hook_params = params.permit(:payload)
+    return {} if hook_params.blank?
     comment = JSON.parse(hook_params[:payload])['comment']
     comment['github_id'] = comment['id']
     comment['author'] = comment['user']['login']

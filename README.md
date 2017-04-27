@@ -8,7 +8,7 @@
   2. `git clone git@github.com:dealer-point/redmine_github_sync.git`
   3. `bundle exec rake redmine:plugins:migrate`
   4. Enable the plugin in the plugins settings
-  5. Go to the GitHub, open settings of the project, select tab 'webhooks' and set url to your server to payload controller with ".json" (for example `http://www.redmine.com/github_sync_payload.json`)
+  5. Go to the GitHub, open settings of the project, select tab 'webhooks' and set url to your server to payload controller with ".json" (for example `http://www.redmine.com/github_payload.json`)
   6. Choose events Pull request and Pull request review comment
 
 ## Connect old pull requests
