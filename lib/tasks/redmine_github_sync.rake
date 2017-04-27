@@ -3,7 +3,7 @@ namespace :redmine do
   task :redmine_github_sync, [:owner, :repo, :token] => [:environment] do |t, args|
     owner = args[:owner]
     repo = args[:repo]
-    token = args[:token]  
+    token = args[:token]
 
     new_pulls = 0
     updates = 0
@@ -12,14 +12,14 @@ namespace :redmine do
     githubApi = GithubApi.new(owner, repo, token)
     puts "\nGetting pulls from #{owner}/#{repo}"
     pulls = githubApi.pulls
-    puts "Count of pull requests(#{owner}/#{repo}): #{pulls.count}\n"  
+    puts "Count of pull requests(#{owner}/#{repo}): #{pulls.count}\n"
     pulls.each do |pull|
       params = request_params(pull)
       title = params['title']
       title_math = /\d+/.match(title)
 
       @issue_number = if title_math
-        title_math[0] 
+        title_math[0]
       else
         nil
       end
@@ -31,10 +31,10 @@ namespace :redmine do
       else
         'Can\'t parse the number from ' + title
       end
-      puts "Namber issue from pull's title: #{message}\r"
+      puts "Number issue from pull's title: #{message}\r"
       if pr.present? && issue.present?
         if pr.update_attributes(params.merge('issue_id'=> issue.id))
-          updates += 1 
+          updates += 1
         else
           errors += 1
         end
@@ -42,7 +42,7 @@ namespace :redmine do
         pr = PullRequest.new(params)
         pr.issue = issue
         if pr.save
-          new_pulls += 1 
+          new_pulls += 1
         else
           errors += 1
         end
@@ -58,5 +58,5 @@ def request_params(pull)
   pull_request = pull
   pull_request['github_id'] = pull_request['id']
   pull_request.slice('html_url', 'title', 'state', 'locked', 'github_id',
-                     'created_at', 'updated_at')
+                     'created_at', 'updated_at', 'number')
 end

@@ -5,11 +5,11 @@ class PullRequestsController < ApplicationController
 
   def index
     @polls = PullRequest.all
-  end  
+  end
 
   def hooks
     issue = issue_by_number
-    if issue.present?         
+    if issue.present?
       pr = PullRequest.find_by(github_id: request_params['github_id'])
       if pr.present?
         pr.update_attributes(request_params.merge('issue_id'=> issue.id))
@@ -20,7 +20,7 @@ class PullRequestsController < ApplicationController
       end
       update_comments(pr.id, action_params) if comment_params && action_params
       render json: { object: pr }
-    else 
+    else
       render json: { message: "don\'t have issue with this number" }
     end
   end
@@ -32,7 +32,7 @@ class PullRequestsController < ApplicationController
     title = request_params['title']
     title_math = /\d+/.match(title)
     @issue_number = if title_math
-      title_math[0] 
+      title_math[0]
     else
       nil
     end
@@ -50,7 +50,7 @@ class PullRequestsController < ApplicationController
     pull_request = JSON.parse(hook_params[:payload])['pull_request']
     pull_request['github_id'] = pull_request['id']
     pull_request.slice('html_url', 'title', 'state', 'locked', 'github_id',
-                       'created_at', 'updated_at')
+                       'created_at', 'updated_at', 'number')
   end
 
   def comment_params
