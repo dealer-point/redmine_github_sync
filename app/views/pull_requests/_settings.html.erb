@@ -1,0 +1,11 @@
+<table>
+  <tbody id="settings-table">
+    <tr>
+      <th>Enable Pull requests</th>
+      <td>
+      <%= hidden_field_tag 'settings[enable_pull_requests]', false %>
+      <%= check_box_tag('settings[enable_pull_requests]', value = 'true', checked = settings['enable_pull_requests']=='true' )%>
+      </td>
+	  </tr>
+  </tbody>
+</table>

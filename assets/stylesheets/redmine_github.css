@@ -1,0 +1,35 @@
+.pr-comments .comment-code {
+  background-color: #fff;
+  padding: 10px;
+}
+
+.pr-comments .red {
+  background-color: rgba(255, 0, 0, 0.50);
+  padding: 3px;
+}
+
+.pr-comments .green {
+  background-color: rgba(0, 255, 0, 0.50);
+  padding: 3px;
+}
+
+.pr-comments .closed {
+  color: #969696;
+  text-decoration: line-through;
+}
+
+.pr-comments .left-column {
+  padding: 5px;
+  width: 50%;
+}
+
+.pr-comments .right-column {
+  margin-left: 10px;
+  display: inline-block;
+  padding: 5px;
+}
+
+td {
+	line-height: 1;
+}
+

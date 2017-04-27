@@ -1,0 +1,27 @@
+<% if Setting.plugin_redmine_github_sync['enable_pull_requests'].eql?('true') %>
+  <hr>
+  <strong>Pull Requests
+  </br>
+  <table>
+    <tbody>
+      <% @issue.pull_requests.order(created_at: :desc).each do |pull| %>
+        <tr class="pr-comments">
+          <td class="left-column">
+            <span> 
+              <a href="<%= pull.html_url %>">
+                <span class=<%= pull.state %>>
+                  Pull Request #<%= pull.issue_id %> 
+                </span>
+              </a>:
+               
+            </span>
+            <%= pull.title %>
+          </td>
+          <td class="right-column">
+            <i><%= pull.state %></i>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

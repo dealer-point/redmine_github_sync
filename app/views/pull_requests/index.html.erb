@@ -1,0 +1,11 @@
+<h2>Pulls</h2>
+<hr>
+<p>
+  <strong>Pull Requests</strong>
+</p>
+<% PullRequest.all.each do |pull| %>
+  <p>
+    <%= pull.title %>
+  </p>
+<% end %>
+
