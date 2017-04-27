@@ -4,6 +4,6 @@
 
 Rails.application.routes.draw do
   match 'pull_requests', :to => 'pull_requests#index', via: [:get, :post]
-  post 'payload', :to => 'pull_requests#hooks'
+  post 'github_sync_payload', :to => 'pull_requests#hooks'
 end
 

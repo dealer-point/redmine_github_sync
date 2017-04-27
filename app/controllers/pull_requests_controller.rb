@@ -1,6 +1,8 @@
+require 'json'
+
 class PullRequestsController < ApplicationController
+  skip_before_filter :verify_authenticity_token, :check_if_login_required
   before_action :require_enable
-  require 'json'
   unloadable
 
   def index
@@ -12,7 +14,7 @@ class PullRequestsController < ApplicationController
     if issue.present?
       pr = PullRequest.find_by(github_id: request_params['github_id'])
       if pr.present?
-        pr.update_attributes(request_params.merge('issue_id'=> issue.id))
+        pr.update_attributes(request_params.merge('issue_id' => issue.id))
       else
         pr = PullRequest.new(request_params)
         pr.issue = issue
