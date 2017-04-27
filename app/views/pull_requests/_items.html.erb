@@ -7,13 +7,13 @@
       <% @issue.pull_requests.order(created_at: :desc).each do |pull| %>
         <tr class="pr-comments">
           <td class="left-column">
-            <span> 
+            <span>
               <a href="<%= pull.html_url %>">
                 <span class=<%= pull.state %>>
-                  Pull Request #<%= pull.issue_id %> 
+                  Pull Request #<%= pull.number.to_s %>
                 </span>
               </a>:
-               
+
             </span>
             <%= pull.title %>
           </td>
